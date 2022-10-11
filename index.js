@@ -10,25 +10,36 @@ getCustomer(1, (customer) => {
   }
 });
 
-function getCustomer(id, callback) {
-  setTimeout(() => {
-    callback({
-      id: 1,
-      name: "Mosh Hamedani",
-      isGold: true,
-      email: "email",
-    });
-  }, 4000);
+function getCustomer(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: id,
+        name: "Mosh Hamedani",
+        isGold: true,
+        email: "email@",
+      });
+    }, 2000);
+  });
 }
 
-function getTopMovies(callback) {
-  setTimeout(() => {
-    callback(["movie1", "movie2"]);
-  }, 4000);
+function getTopMovies(isGold) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!isGold) {
+        reject({ message: "customer is not gold." });
+      } else {
+        resolve(["movie1", "movie2"]);
+      }
+    }, 2000);
+  });
 }
 
-function sendEmail(email, movies, callback) {
-  setTimeout(() => {
-    callback();
-  }, 4000);
+function sendEmail(email) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("sending email to: ", email);
+      resolve();
+    }, 2000);
+  });
 }
