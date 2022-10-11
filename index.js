@@ -1,4 +1,4 @@
-async function emailSendConfirmation() {
+async function notifyCustomer() {
   try {
     const customer = await getCustomer(1);
     console.log(customer);
@@ -10,7 +10,7 @@ async function emailSendConfirmation() {
     console.log("Error: ", err.message);
   }
 }
-emailSendConfirmation();
+notifyCustomer();
 
 function getCustomer(id) {
   return new Promise((resolve, reject) => {
