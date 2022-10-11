@@ -1,14 +1,16 @@
-getCustomer(1, (customer) => {
-  console.log("Customer: ", customer);
-  if (customer.isGold) {
-    getTopMovies((movies) => {
-      console.log("Top movies: ", movies);
-      sendEmail(customer.email, movies, () => {
-        console.log("Email sent...");
-      });
-    });
+async function emailSendConfirmation() {
+  try {
+    const customer = await getCustomer(1);
+    console.log(customer);
+    const movies = await getTopMovies(customer.isGold);
+    console.log(movies);
+    await sendEmail(customer.email, movies);
+    console.log("email sent...");
+  } catch (err) {
+    console.log("Error: ", err.message);
   }
-});
+}
+emailSendConfirmation();
 
 function getCustomer(id) {
   return new Promise((resolve, reject) => {
